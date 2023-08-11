@@ -10,6 +10,7 @@ public class SierpinskiGenerator : MonoBehaviour
 
     [SerializeField] private float width = 10;
     [SerializeField] private float height = 10;
+    [SerializeField] private Vector3 pointOffset = new Vector3(0, 0);
     [SerializeField] private int sides = 6;
     private int futureSlides;
     [SerializeField] private float distance = .66f;
@@ -81,6 +82,7 @@ public class SierpinskiGenerator : MonoBehaviour
     {
         startingPoints = new GameObject[sides];
         pointsParent = new GameObject("Points");
+        pointsParent.transform.position += pointOffset;
         /*startingPoints[0] = Instantiate(point, new Vector3(-width / 2, 0          , 0), Quaternion.identity, pointsParent.transform);
         startingPoints[1] = Instantiate(point, new Vector3(-width / 4, height / 2 , 0), Quaternion.identity, pointsParent.transform);
         startingPoints[2] = Instantiate(point, new Vector3(width / 4 , height / 2 , 0), Quaternion.identity, pointsParent.transform);
@@ -102,7 +104,7 @@ public class SierpinskiGenerator : MonoBehaviour
         Vector3 newPointPos;
         int nextNum = Random.Range(0, sides);
         newPointPos = Vector3.Lerp(previousPoint.transform.position, startingPoints[nextNum].transform.position, distance);
-        previousPoint = Instantiate(point,  newPointPos, Quaternion.identity, pointsParent.transform);
+        previousPoint = Instantiate(point, newPointPos, Quaternion.identity, pointsParent.transform);
     }
 
     private void addMultiplePoints(int amt)
